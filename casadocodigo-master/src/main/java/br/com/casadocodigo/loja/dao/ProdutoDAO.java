@@ -1,6 +1,7 @@
 package br.com.casadocodigo.loja.dao;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -19,7 +20,6 @@ public class ProdutoDAO {
 
 	@PersistenceContext
 	private EntityManager manager;
-	private List resultList;
 	
 	public void gravar(Produto produto) {
 		manager.persist(produto);
@@ -36,10 +36,10 @@ public class ProdutoDAO {
         		.getSingleResult();
 	}
 
-	public List<Produto> selecionaProdutosPorData() {
-		return manager.createQuery("select distinct(p) from Produto p join fetch p.precos", Produto.class)
+	public List<Produto> selecionaProdutosPorData(Calendar dataLancamento) {
+		return manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.dataLancamento >= :dataLancamento", 
+				Produto.class).setParameter("dataLancamento", dataLancamento)
 				.getResultList();
-		
 	}
 	
 	public BigDecimal somaPrecosPorTipo(TipoPreco tipoPreco){
