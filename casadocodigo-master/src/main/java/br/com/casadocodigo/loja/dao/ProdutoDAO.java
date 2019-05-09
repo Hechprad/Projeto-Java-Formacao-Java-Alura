@@ -26,12 +26,6 @@ public class ProdutoDAO {
 		manager.persist(produto);
 	}
 
-//	public Object listar2() {
-//		return manager.createQuery("select distinct(p), cont(p.id) as quantidade from Produto p join fetch p.precos", 
-//				Produto.class)
-//				.getParameterValue("quantidade");
-//	}
-
 	public List<Produto> listar() {
 		return manager.createQuery("select distinct(p) from Produto p join fetch p.precos", Produto.class)
 				.getResultList();
@@ -43,12 +37,24 @@ public class ProdutoDAO {
         		.getSingleResult();
 	}
 
-	
 	public BigDecimal somaPrecosPorTipo(TipoPreco tipoPreco){
 	    TypedQuery<BigDecimal> query = manager.createQuery("select sum(preco.valor) from Produto p join p.precos preco "
 	    		+ "where preco.tipo = :tipoPreco", BigDecimal.class);
 	    query.setParameter("tipoPreco", tipoPreco);
 	    return query.getSingleResult();
+	}
+	
+	public Relatorio selecionaProdutosSemData() {
+		
+		Relatorio relatorio = new Relatorio();
+		
+		relatorio.setProdutos(manager.createQuery("select distinct(p) from Produto p join fetch p.precos preco", Produto.class)
+				.getResultList());
+		relatorio.setQuantidade();
+		Calendar dataGeracao = Calendar.getInstance();
+		relatorio.setDataGeracao(dataGeracao);
+		
+		return relatorio;
 	}
 	
 	public Relatorio selecionaProdutosPorData(Calendar dataLancamento) {
@@ -58,13 +64,10 @@ public class ProdutoDAO {
 		relatorio.setProdutos(manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.dataLancamento >= :dataLancamento", 
 				Produto.class).setParameter("dataLancamento", dataLancamento)
 				.getResultList());
-		relatorio.setQuantidade(manager.createQuery("select distinct(p), cont(p.id) as quantidade from Produto p join fetch p.precos precos where p.dataLancamento >= :dataLancamento", 
-				Long.class).setParameter("dataLancamento", dataLancamento)
-				.getSingleResult());
-		Calendar dataDeGeracao = Calendar.getInstance();
-		relatorio.setDataDeGeracao(dataDeGeracao);
+		relatorio.setQuantidade();
+		Calendar dataGeracao = Calendar.getInstance();
+		relatorio.setDataGeracao(dataGeracao);
 		
 		return relatorio;
 	}
-	
 }

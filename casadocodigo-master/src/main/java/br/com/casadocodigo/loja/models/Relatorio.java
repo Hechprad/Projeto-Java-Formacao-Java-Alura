@@ -8,18 +8,27 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Relatorio {
 
-	private Long quantidade;
+	@DateTimeFormat
+	private Calendar dataGeracao;
+
+	private int quantidade;
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
-	@DateTimeFormat
-	private Calendar dataDeGeracao;
 
-	public Long getQuantidade() {
+	public Calendar getDataGeracao() {
+		return dataGeracao;
+	}
+	
+	public void setDataGeracao(Calendar dataGeracao) {
+		this.dataGeracao = dataGeracao;
+	}
+
+	public int getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Long quantidade) {
-		this.quantidade = quantidade;
+	public void setQuantidade() {
+		this.quantidade = produtos.size();
 	}
 
 	public List<Produto> getProdutos() {
@@ -30,11 +39,4 @@ public class Relatorio {
 		this.produtos = produtos;
 	}
 
-	public Calendar getDataDeGeracao() {
-		return dataDeGeracao;
-	}
-
-	public void setDataDeGeracao(Calendar dataDeGeracao) {
-		this.dataDeGeracao = dataDeGeracao;
-	}
 }
