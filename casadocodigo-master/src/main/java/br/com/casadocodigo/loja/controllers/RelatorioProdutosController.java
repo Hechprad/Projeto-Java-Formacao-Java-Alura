@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.casadocodigo.loja.dao.ProdutoDAO;
 import br.com.casadocodigo.loja.models.Produto;
+import br.com.casadocodigo.loja.models.Relatorio;
 
 @Controller
 public class RelatorioProdutosController {
@@ -24,14 +25,19 @@ public class RelatorioProdutosController {
 	
 	@RequestMapping(value="/relatorio-produtos", method=RequestMethod.GET)
 	@ResponseBody
-	public List<Produto> listaProdutosCadastrados(@RequestParam(value = "data", required = false) String dataLancamento) throws ParseException {
+	public Relatorio listaProdutosCadastrados(@RequestParam(value = "data", required = false) String dataLancamento) throws ParseException {
 		
-		SimpleDateFormat formatadorDeData = new SimpleDateFormat("yyyy-MM-dd");
-        Date dataFormatada = formatadorDeData.parse(dataLancamento);
-        Calendar data = Calendar.getInstance();
-        data.setTime(dataFormatada);
-		return dao.selecionaProdutosPorData(data);
-		
+		//Lista de livros com data e sem data
+		if(dataLancamento != null) {
+			SimpleDateFormat formatadorDeData = new SimpleDateFormat("yyyy-MM-dd");
+	        Date dataFormatada = formatadorDeData.parse(dataLancamento);
+	        Calendar data = Calendar.getInstance();
+	        data.setTime(dataFormatada);
+			return dao.selecionaProdutosPorData(data);
+		} else {
+			return dao.listar();
+		}
 	}
-
+	
+	
 }
