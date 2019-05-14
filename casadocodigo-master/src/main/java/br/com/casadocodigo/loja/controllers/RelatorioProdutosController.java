@@ -6,23 +6,23 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.casadocodigo.loja.dao.ProdutoDAO;
 import br.com.casadocodigo.loja.models.Relatorio;
 
-@Controller
+
+@RestController
 public class RelatorioProdutosController {
 	
 	@Autowired
 	private ProdutoDAO dao;
 	
-	@RequestMapping(value="/relatorio-produtos", method=RequestMethod.GET)
+	@RequestMapping(value="/relatorio-produtos", method=RequestMethod.GET, produces = {"application/json"})
 	@ResponseBody
 	public Relatorio listaProdutosCadastrados(@RequestParam(value = "data", required = false) String dataLancamento) throws ParseException {
 		//Lista de livros com data e sem data
@@ -33,7 +33,8 @@ public class RelatorioProdutosController {
 	        data.setTime(dataFormatada);
 			return dao.selecionaProdutosPorData(data);
 		} else {
-			return dao.selecionaProdutosSemData();
+			return dao.selecionaTodosProdutos();
 		}
 	}
+
 }

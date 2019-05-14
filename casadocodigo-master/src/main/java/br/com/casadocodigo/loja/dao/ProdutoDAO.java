@@ -44,7 +44,7 @@ public class ProdutoDAO {
 	    return query.getSingleResult();
 	}
 	
-	public Relatorio selecionaProdutosSemData() {
+	public Relatorio selecionaTodosProdutos() {
 		
 		Relatorio relatorio = new Relatorio();
 		

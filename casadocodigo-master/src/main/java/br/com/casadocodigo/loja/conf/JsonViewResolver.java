@@ -17,6 +17,4 @@ public class JsonViewResolver implements ViewResolver {
 		return view;
 	}
 	
-	
-
 }

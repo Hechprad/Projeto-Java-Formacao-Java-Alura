@@ -17,6 +17,8 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.accept.ContentNegotiationManager;
@@ -139,4 +141,16 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		
 		return mailSender;
 	}
+	
+	//Método para habilitar o prettyprint do json
+	@Override
+	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+		for ( HttpMessageConverter<?> converter : converters ) {
+            if ( converter instanceof MappingJackson2HttpMessageConverter) {
+                MappingJackson2HttpMessageConverter jacksonConverter = (MappingJackson2HttpMessageConverter) converter;
+                jacksonConverter.setPrettyPrint(true);
+            }
+        }
+	}
+	
 }
