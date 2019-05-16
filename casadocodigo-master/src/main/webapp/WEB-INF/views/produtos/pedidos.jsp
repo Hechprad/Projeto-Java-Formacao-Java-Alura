@@ -6,10 +6,10 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tags"%>
 
-<tags:pageTemplate titulo="Lista de pedidos">
+<tags:pageTemplate titulo="Lista de pedidos Atuais">
 
 	<div class="container">
-		<h1>Lista de Pedidos</h1>
+		<h1>Lista de Pedidos Atuais</h1>
 	
 		<table class="table table-bordered table-striped table-hover">
 			<tr>
