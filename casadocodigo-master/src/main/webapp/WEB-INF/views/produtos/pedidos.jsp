@@ -9,14 +9,14 @@
 <tags:pageTemplate titulo="Lista de pedidos Atuais">
 
 	<div class="container">
-		<h1>Lista de Pedidos Atuais</h1>
+		<h1><fmt:message key="pedidos.cabecalho"/></h1>
 	
 		<table class="table table-bordered table-striped table-hover">
 			<tr>
-				<th>Id</th>
-				<th>Valor</th>
-				<th>Data Pedido</th> 
-				<th>Títulos</th>
+				<th><fmt:message key="pedidos.id"/></th>
+				<th><fmt:message key="pedidos.valor"/></th>
+				<th><fmt:message key="pedidos.data_pedido"/></th> 
+				<th><fmt:message key="pedidos.titulos"/></th>
 			</tr>
 			<c:forEach items="${response}" var="response">
 				<tr>
