@@ -24,6 +24,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/relatorio-produtos").permitAll()
 			.antMatchers("/pedidos").hasRole("ADMIN")
 			.antMatchers("/produtos/**").hasRole("ADMIN")
+			
+			
+			
+			
+			.antMatchers("/usuarios/**").permitAll()		//MUDAR APÓS OS TESTES PARA APENAS ADMIN
+			
+			
+			
+			
+			
 			.antMatchers("/carrinho/**").permitAll()	
 			.antMatchers("/pagamento/**").permitAll()	
 			.antMatchers("/").permitAll()

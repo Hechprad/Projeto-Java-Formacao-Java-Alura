@@ -97,4 +97,9 @@ public class Usuario implements UserDetails {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		
+		return "Usuário [Nome: " + nome + " Email: " + email + " Senha: " + senha + "]";
+	}
 }
