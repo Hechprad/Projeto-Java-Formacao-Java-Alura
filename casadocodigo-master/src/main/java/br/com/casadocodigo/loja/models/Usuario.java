@@ -22,6 +22,7 @@ public class Usuario implements UserDetails {
 	@Id
 	private String email;
 	private String senha;
+	private String senhaRepetida;
 	private String nome;
 
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -46,6 +47,14 @@ public class Usuario implements UserDetails {
 		this.senha = senha;
 	}
 
+	public String getSenhaRepetida() {
+		return senhaRepetida;
+	}
+	
+	public void setSenhaRepetida(String senhaRepetida) {
+		this.senhaRepetida = senhaRepetida;
+	}
+	
 	public String getNome() {
 		return nome;
 	}

@@ -84,7 +84,7 @@ public class HomeController {
 
 	    usuario.setRoles(Arrays.asList(roleAdmin));
 
-	    usuarioDao.gravar(usuario);
+	    usuarioDao.gravarUsuario(usuario);
 
 	    return "Url Mágica executada";
 	}

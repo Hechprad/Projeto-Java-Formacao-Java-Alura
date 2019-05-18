@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.casadocodigo.loja.models.Usuario;
 
 @Repository
+@Transactional
 public class UsuarioDAO implements UserDetailsService{
 
 	@PersistenceContext
@@ -30,7 +31,12 @@ public class UsuarioDAO implements UserDetailsService{
 		return usuarios.get(0);
 	}
 
-	public void gravar(Usuario usuario) {
+	public void gravarUsuario(Usuario usuario) {
 		manager.persist(usuario);
+	}
+
+	public List<Usuario> listarUsuarios() {
+		return manager.createQuery("select u from Usuario u", Usuario.class)
+				.getResultList();
 	}
 }

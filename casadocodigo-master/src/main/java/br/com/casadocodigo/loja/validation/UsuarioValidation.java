@@ -15,12 +15,12 @@ public class UsuarioValidation implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmpty(errors, "titulo", "field.required");
-		ValidationUtils.rejectIfEmpty(errors, "descricao", "field.required");
+		ValidationUtils.rejectIfEmpty(errors, "nome", "field.required.usuario.nome");
+		ValidationUtils.rejectIfEmpty(errors, "email", "field.required.usuario.email");
 
 		Usuario usuario = (Usuario) target;
 		if(usuario.getNome() == null) {
-			errors.rejectValue("paginas", "field.required");
+			errors.rejectValue("nome", "field.required.usuario.nome");
 		}		
 	}
 }

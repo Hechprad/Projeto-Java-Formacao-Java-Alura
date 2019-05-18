@@ -10,26 +10,26 @@
 
 	<div class="container">
 		<h1>Cadastro de Usuário</h1>
-		<form:form action="${s:mvcUrl('UC#gravarUsuario').build() }" method="post" modelAttribute="usuario" enctype="application/x-www-form-urlencoded">
+		<form:form action="${s:mvcUrl('UC#gravarUsuario').build() }" method="post" commandName="usuario" enctype="application/x-www-form-urlencoded">
 			<div class="form-group">
 				<label>Nome</label>
 				<form:input path="nome" cssClass="form-control" />
-				<form:errors path="" />	<!-- ******************************************************** -->
+				<form:errors path="nome" />
 			</div>
 			<div class="form-group">
 		        <label>Email</label>
 				<form:input path="email" cssClass="form-control" />
-		        <form:errors path="" />	<!-- ******************************************************** -->
+		        <form:errors path="email" />
 			</div>
 			<div class="form-group">
 				<label>Senha</label>
 				<form:password path="senha" cssClass="form-control" />
-		        <form:errors path="" />	<!-- ******************************************************** -->
+		        <form:errors path="senha" />
 			</div>
 			<div class="form-group">
 				<label>Senha Repetida</label>
 				<form:password path="senhaRepetida" cssClass="form-control"/>
-		        <form:errors path="" />	<!-- ******************************************************** -->
+		        <form:errors path="senhaRepetida" />
 			</div>
 
 			<button type="submit" class="btn btn-primary">Cadastrar</button>
