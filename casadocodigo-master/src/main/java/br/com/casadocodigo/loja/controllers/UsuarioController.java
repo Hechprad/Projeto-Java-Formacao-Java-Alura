@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -23,7 +24,10 @@ import br.com.casadocodigo.loja.validation.UsuarioValidation;
 public class UsuarioController {
 	
 	@Autowired
-	private UsuarioDAO dao;
+	private UsuarioDAO usuarioDao;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -42,16 +46,18 @@ public class UsuarioController {
 			return formUsuario(usuario);
 		}
 		
-		dao.gravarUsuario(usuario);
+		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+		usuario.setSenhaRepetida(passwordEncoder.encode(usuario.getSenhaRepetida()));
+		usuarioDao.gravarUsuario(usuario);
 		
-		redirectAttributes.addFlashAttribute("message", "Usuário " + usuario.getNome() + ", cadastrado com sucesso!");
+		redirectAttributes.addFlashAttribute("sucesso", "Usuário " + usuario.getNome() + ", cadastrado com sucesso!");
 		
 		return new ModelAndView("redirect:/usuarios");
 	}
 
 	@RequestMapping(method=RequestMethod.GET)
     public ModelAndView listarUsuarios(Usuario usuario){
-        List<Usuario> usuarios = dao.listarUsuarios();
+        List<Usuario> usuarios = usuarioDao.listarUsuarios();
 		ModelAndView modelAndView = new ModelAndView("usuarios/listaUsuarios");
 		modelAndView.addObject("usuarios", usuarios);
 		return modelAndView;

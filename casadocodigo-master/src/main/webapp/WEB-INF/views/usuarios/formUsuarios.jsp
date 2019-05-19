@@ -8,7 +8,15 @@
 
 <tags:pageTemplate titulo="Cadastro de Usuários">
 
+<c:url value="/resources/css" var="cssPath" />
+<c:url value="/resources/js" var="jp"/>
+<link rel="stylesheet" href="${cssPath}/bootstrap.min.css" />
+<link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="${jp}/bootstrap.min.js"></script>
+
 	<div class="container">
+	
 		<h1>Cadastro de Usuário</h1>
 		<form:form action="${s:mvcUrl('UC#gravarUsuario').build() }" method="post" commandName="usuario" enctype="application/x-www-form-urlencoded">
 			<div class="form-group">
@@ -35,5 +43,6 @@
 			<button type="submit" class="btn btn-primary">Cadastrar</button>
 		</form:form>
 	</div>
-
+	<br/>
+	
 </tags:pageTemplate>
