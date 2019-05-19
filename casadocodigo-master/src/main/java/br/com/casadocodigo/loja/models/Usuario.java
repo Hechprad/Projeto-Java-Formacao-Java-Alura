@@ -109,6 +109,6 @@ public class Usuario implements UserDetails {
 	@Override
 	public String toString() {
 		
-		return "Usuário [Nome: " + nome + " Email: " + email + " Senha: " + senha + "]";
+		return "Usuário [Nome: " + nome + " Email: " + email + " Senha: " + senha + " Senha repetida: " + senhaRepetida + "]";
 	}
 }
