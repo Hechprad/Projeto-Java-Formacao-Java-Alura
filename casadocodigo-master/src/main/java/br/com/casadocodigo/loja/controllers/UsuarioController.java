@@ -40,17 +40,24 @@ public class UsuarioController {
     }
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ModelAndView gravarUsuario(@Valid Usuario usuario, RedirectAttributes redirectAttributes, BindingResult result){
+	public ModelAndView gravarUsuario(@Valid Usuario usuario, BindingResult result, RedirectAttributes redirectAttributes){
 		
 		if (result.hasErrors()) {
 			return formUsuario(usuario);
 		}
 		
+		if(usuarioDao.findUserByEmail(usuario.getEmail())){
+			redirectAttributes.addFlashAttribute("falha", "Usuário '"+ usuario.getEmail() + "' já existe");
+			return new ModelAndView("redirect:/usuarios");
+		}
+		
+		//Encriptando a senha
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		usuario.setSenhaRepetida(passwordEncoder.encode(usuario.getSenhaRepetida()));
+		
 		usuarioDao.gravarUsuario(usuario);
 		
-		redirectAttributes.addFlashAttribute("sucesso", "Usuário " + usuario.getNome() + ", cadastrado com sucesso!");
+		redirectAttributes.addFlashAttribute("sucesso", "Usuário '" + usuario.getNome() + "' cadastrado com sucesso!");
 		
 		return new ModelAndView("redirect:/usuarios");
 	}

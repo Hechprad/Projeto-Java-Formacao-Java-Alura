@@ -29,6 +29,14 @@
 				${sucesso}
 			</div>
 		</c:if>
+		<c:if test="${falha != null}"> 
+			<div class="alert alert-danger text-center alert-dismissible" role="alert" style="font-size: 30px;">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				${falha}
+			</div>
+		</c:if>
 	
 		<table class="table table-bordered table-striped table-hover">
 			<tr>
