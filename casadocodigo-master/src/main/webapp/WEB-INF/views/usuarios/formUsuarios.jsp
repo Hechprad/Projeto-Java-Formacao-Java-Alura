@@ -17,30 +17,30 @@
 
 	<div class="container">
 	
-		<h1>Cadastro de Usuário</h1>
+		<h1><fmt:message key="form.usuarios.titulo"/></h1>
 		<form:form action="${s:mvcUrl('UC#gravarUsuario').build() }" method="post" commandName="usuario" enctype="application/x-www-form-urlencoded">
 			<div class="form-group">
-				<label>Nome</label>
+				<label><fmt:message key="form.usuarios.nome"/></label>
 				<form:input path="nome" cssClass="form-control" />
 				<form:errors path="nome" />
 			</div>
 			<div class="form-group">
-		        <label>Email</label>
+		        <label><fmt:message key="form.usuarios.email"/></label>
 				<form:input path="email" cssClass="form-control" />
 		        <form:errors path="email" />
 			</div>
 			<div class="form-group">
-				<label>Senha</label>
+				<label><fmt:message key="form.usuarios.senha"/></label>
 				<form:password path="senha" cssClass="form-control" />
 		        <form:errors path="senha" />
 			</div>
 			<div class="form-group">
-				<label>Senha Repetida</label>
+				<label><fmt:message key="form.usuarios.senha_repetida"/></label>
 				<form:password path="senhaRepetida" cssClass="form-control"/>
 		        <form:errors path="senhaRepetida" />
 			</div>
 
-			<button type="submit" class="btn btn-primary">Cadastrar</button>
+			<button type="submit" class="btn btn-primary"><fmt:message key="form.usuarios.cadastrar"/></button>
 		</form:form>
 	</div>
 	<br/>

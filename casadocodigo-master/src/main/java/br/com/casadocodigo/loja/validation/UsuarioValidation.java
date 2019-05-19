@@ -17,7 +17,7 @@ public class UsuarioValidation implements Validator {
 	public void validate(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "field.required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "field.required.usuario.email");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "senha", "field.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "senha", "field.required.usuario.senha");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "senhaRepetida", "field.required");
 
 		Usuario usuario = (Usuario) target;

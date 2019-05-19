@@ -28,6 +28,12 @@
 		<link href="${contextPath}resources/css/produtos.css" rel="stylesheet" type="text/css" media="all" />
 		<link rel="canonical" href="http://www.casadocodigo.com.br/" />
 		<link href="${contextPath}resources/css/book-collection.css" rel="stylesheet" type="text/css" media="all" />
+		<c:url value="/resources/css" var="cssPath" />
+		<c:url value="/resources/js" var="jp"/>
+		<link rel="stylesheet" href="${cssPath}/bootstrap.min.css" />
+		<link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="${jp}/bootstrap.min.js"></script>
 	</head>
 	<body class="${bodyClass}">
 

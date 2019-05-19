@@ -7,18 +7,11 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tags"%>
 
 <tags:pageTemplate titulo="Lista de Usuários">
-	
-<c:url value="/resources/css" var="cssPath" />
-<c:url value="/resources/js" var="jp"/>
-<link rel="stylesheet" href="${cssPath}/bootstrap.min.css" />
-<link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="${jp}/bootstrap.min.js"></script>
 	    
 	<div class="container">
 		
-		<h1><a href="${s:mvcUrl('UC#formUsuario').build() }" rel="nofollow">Novo Usuário</a></h1>
-		<h1>Lista de Usuarios</h1>
+		<h1><a href="${s:mvcUrl('UC#formUsuario').build() }" rel="nofollow"><fmt:message key="lista.usuarios.novo_usuario"/></a></h1>
+		<h1><fmt:message key="lista.usuarios.titulo"/></h1>
 		
 		<c:if test="${sucesso != null}"> 
 		<br/>
@@ -40,8 +33,8 @@
 	
 		<table class="table table-bordered table-striped table-hover">
 			<tr>
-				<th>Nome</th>
-				<th>Email</th> 
+				<th><fmt:message key="lista.usuarios.nome"/></th>
+				<th><fmt:message key="lista.usuarios.email"/></th> 
 			</tr>
 			<c:forEach items="${usuarios}" var="usuario">
 				<tr>
