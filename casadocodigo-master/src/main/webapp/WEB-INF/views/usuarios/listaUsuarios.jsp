@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
@@ -34,12 +35,28 @@
 		<table class="table table-bordered table-striped table-hover">
 			<tr>
 				<th><fmt:message key="lista.usuarios.nome"/></th>
-				<th><fmt:message key="lista.usuarios.email"/></th> 
+				<th><fmt:message key="lista.usuarios.email"/></th>
+				<th><fmt:message key="lista.usuarios.role"/></th>
+				<th><img src="${contextPath}resources/imagens/editar.png" alt="Editar"/></th>
 			</tr>
 			<c:forEach items="${usuarios}" var="usuario">
 				<tr>
 					<td>${usuario.nome}</td>
 					<td>${usuario.email}</td>
+					<td>
+					<c:forEach items="${usuario.roles}" var="role">
+							<c:if test="${fn:length(usuario.roles) gt contador.count}">
+								${role.nome},
+							</c:if>
+							${role.nome}
+					</c:forEach>
+					</td>
+					<td>
+						<form:form action="${s:mvcUrl('UC#adicionarRole').arg(0, item.produto.id).arg(1,item.tipoPreco).build() }" method="POST">
+							<input type="image" src="${contextPath}resources/imagens/adicionar.png" 
+								alt="Adicionar" title="Adicionar" />
+						</form:form>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

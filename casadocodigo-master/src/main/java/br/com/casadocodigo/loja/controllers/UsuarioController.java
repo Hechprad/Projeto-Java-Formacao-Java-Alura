@@ -63,12 +63,17 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(method=RequestMethod.GET)
-    public ModelAndView listarUsuarios(Usuario usuario){
+    public ModelAndView listarUsuarios(){
         List<Usuario> usuarios = usuarioDao.listarUsuarios();
 		ModelAndView modelAndView = new ModelAndView("usuarios/listaUsuarios");
 		modelAndView.addObject("usuarios", usuarios);
 		return modelAndView;
     }
 	
+	@RequestMapping("/formRoles")
+	private ModelAndView adicionarRole(Usuario usuario) {
+		
+		return new ModelAndView("redirect:/usuarios");
+	}
 
 }
