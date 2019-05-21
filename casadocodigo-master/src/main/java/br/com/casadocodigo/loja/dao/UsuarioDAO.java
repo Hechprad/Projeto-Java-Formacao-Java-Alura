@@ -54,4 +54,12 @@ public class UsuarioDAO implements UserDetailsService{
 				return false;
 			}
 	}
+
+	public Usuario buscaUsuario(String email) {
+		Usuario usuario = manager.createQuery("select u from Usuario u where email = :email", Usuario.class)
+				.setParameter("email", email)
+				.getSingleResult();
+		return usuario;
+	}
+	
 }

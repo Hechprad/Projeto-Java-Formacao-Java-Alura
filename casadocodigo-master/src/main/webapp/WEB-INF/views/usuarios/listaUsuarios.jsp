@@ -44,7 +44,7 @@
 					<td>${usuario.nome}</td>
 					<td>${usuario.email}</td>
 					<td>
-					<c:forEach items="${usuario.roles}" var="role">
+					<c:forEach items="${usuario.roles}" var="role" varStatus="contador">
 							<c:if test="${fn:length(usuario.roles) gt contador.count}">
 								${role.nome},
 							</c:if>
@@ -52,10 +52,9 @@
 					</c:forEach>
 					</td>
 					<td>
-						<form:form action="${s:mvcUrl('UC#adicionarRole').arg(0, item.produto.id).arg(1,item.tipoPreco).build() }" method="POST">
-							<input type="image" src="${contextPath}resources/imagens/adicionar.png" 
-								alt="Adicionar" title="Adicionar" />
-						</form:form>
+						<a href="${s:mvcUrl('UC#adicionaRole').arg(0, usuario.email).build() }">
+							<img alt="adicionar" src="${contextPath}resources/imagens/adicionar.png">
+						</a>
 					</td>
 				</tr>
 			</c:forEach>

@@ -2,11 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tags"%>
 
-<tags:pageTemplate titulo="Cadastro de Usuários">
+<tags:pageTemplate titulo="Editando roles de ${usuario.nome}">
 
 <c:url value="/resources/css" var="cssPath" />
 <c:url value="/resources/js" var="jp"/>
@@ -16,32 +17,27 @@
 <script src="${jp}/bootstrap.min.js"></script>
 
 	<div class="container">
-	
-		<h1><fmt:message key="form.usuarios.titulo"/></h1>
-		<form:form action="${s:mvcUrl('UC#gravarUsuario').build() }" method="post" commandName="usuario" enctype="application/x-www-form-urlencoded">
+		<h1>Cadastro de permissões para ${usuario.nome }</h1>
+		<form:form action="${s:mvcUrl('UC#atualizaPermissoesDoUsuario').build() }" method="post" commandName="roles" enctype="application/x-www-form-urlencoded">
 			<div class="form-group">
-				<label><fmt:message key="form.usuarios.nome"/></label>
-				<form:input path="nome" cssClass="form-control" />
-				<form:errors path="nome" />
+				
+				<c:forEach items="${roles}" var="role" varStatus="contador_um">
+					<c:if test="${fn:length(roles) ge contador_um.count}">
+						<label>${role.nome}</label>
+						<input type="checkbox" name="${role.nome}"
+							<c:if test="${temRole[contador_um.count-1] == true}"> 
+							 	checked="checked" 
+							</c:if>
+						value="${role.nome}"/>
+					</c:if>
+				</c:forEach>
+				
 			</div>
-			<div class="form-group">
-		        <label><fmt:message key="form.usuarios.email"/></label>
-				<form:input path="email" cssClass="form-control" />
-		        <form:errors path="email" />
-			</div>
-			<div class="form-group">
-				<label><fmt:message key="form.usuarios.senha"/></label>
-				<form:password path="senha" cssClass="form-control" />
-		        <form:errors path="senha" />
-			</div>
-			<div class="form-group">
-				<label><fmt:message key="form.usuarios.senha_repetida"/></label>
-				<form:password path="senhaRepetida" cssClass="form-control"/>
-		        <form:errors path="senhaRepetida" />
-			</div>
-
-			<button type="submit" class="btn btn-primary"><fmt:message key="form.usuarios.cadastrar"/></button>
+			
+			
+			<button type="submit" class="btn btn-primary">Atualizar</button>
 		</form:form>
+	
 	</div>
 	<br/>
 	
