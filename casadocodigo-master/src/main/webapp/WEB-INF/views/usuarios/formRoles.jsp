@@ -28,7 +28,7 @@
 				Permissões: 
 				<c:forEach items="${roles}" var="role" varStatus="contador_um">
 					<c:if test="${fn:length(roles) ge contador_um.count}">
-						<form:checkbox path="roles" value="${role.nome }" />
+						<form:checkbox path="roles" value="${role.nome}" />
 						<label>${role.nome}</label>
 					</c:if>
 				</c:forEach>
