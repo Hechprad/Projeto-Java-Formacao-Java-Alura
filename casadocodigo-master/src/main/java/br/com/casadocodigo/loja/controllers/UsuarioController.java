@@ -91,7 +91,10 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value="/formRoles", method=RequestMethod.POST)
-	private ModelAndView atualizaPermissoesDoUsuario(Usuario usuario) {
+	private ModelAndView atualizaPermissoesDoUsuario(Usuario usuario, RedirectAttributes redirectAttributes) {
+		
+		usuarioDao.atualizaPermissao(usuario);
+		redirectAttributes.addFlashAttribute("permissoesAlteradasComSucesso", "Permissões alteradas com sucesso!");
 		
 		return new ModelAndView("redirect:/usuarios");
 	}

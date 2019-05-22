@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
+
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tags"%>
 
 <tags:pageTemplate titulo="Lista de pedidos Atuais">
 
+	<security:authorize access="hasRole('ROLE_ADMIN')">
 	<div class="container">
 		<h1><fmt:message key="pedidos.cabecalho"/></h1>
 	
@@ -35,5 +36,6 @@
 			</c:forEach>
 		</table>
 	</div>
-
+	</security:authorize>
+	
 </tags:pageTemplate>

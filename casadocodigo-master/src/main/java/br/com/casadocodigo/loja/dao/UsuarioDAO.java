@@ -61,5 +61,11 @@ public class UsuarioDAO implements UserDetailsService{
 				.getSingleResult();
 		return usuario;
 	}
+
+	public void atualizaPermissao(Usuario usuario) {
+		Usuario usuarioAtualizado = buscaUsuario(usuario.getEmail());
+		usuarioAtualizado.setRoles(usuario.getRoles());	
+		gravarUsuario(usuarioAtualizado);
+	}
 	
 }
