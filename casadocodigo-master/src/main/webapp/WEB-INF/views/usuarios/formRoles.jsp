@@ -15,9 +15,10 @@
 <link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="${jp}/bootstrap.min.js"></script>
-
+	
+	<security:authorize access="hasRole('ROLE_ADMIN')">
 	<div class="container">
-		<h1>Cadastro de permissões para ${usuario.nome }</h1>
+		<h1><s:message code="form.roles.titulo" arguments="${usuario.nome}" /></h1>
 		<form:form action="${s:mvcUrl('UC#atualizaPermissoesDoUsuario').build() }" method="post" commandName="usuario" enctype="application/x-www-form-urlencoded">
 			<div class="form-group">
 				
@@ -25,7 +26,7 @@
 				<form:input path="email" type="hidden" name="${usuario.email}" />
 				<form:input path="senha" type="hidden" name="${usuario.senha}" />
 				<form:input path="senhaRepetida" type="hidden" name="${usuario.senhaRepetida}" />
-				Permissões: 
+				<fmt:message key="form.roles.permissoes"/>
 				<c:forEach items="${roles}" var="role" varStatus="contador_um">
 					<c:if test="${fn:length(roles) ge contador_um.count}">
 						<form:checkbox path="roles" value="${role.nome}" />
@@ -33,11 +34,10 @@
 					</c:if>
 				</c:forEach>
 			</div>
-			
-			<button type="submit" class="btn btn-primary">Atualizar</button>
+			<button type="submit" class="btn btn-primary"><fmt:message key="form.roles.atualizar"/></button>
 		</form:form>
-	
 	</div>
+	</security:authorize>
 	<br/>
 	
 </tags:pageTemplate>
