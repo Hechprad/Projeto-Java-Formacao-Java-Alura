@@ -18,22 +18,21 @@
 
 	<div class="container">
 		<h1>Cadastro de permissões para ${usuario.nome }</h1>
-		<form:form action="${s:mvcUrl('UC#atualizaPermissoesDoUsuario').build() }" method="post" commandName="roles" enctype="application/x-www-form-urlencoded">
+		<form:form action="${s:mvcUrl('UC#atualizaPermissoesDoUsuario').build() }" method="post" commandName="usuario" enctype="application/x-www-form-urlencoded">
 			<div class="form-group">
 				
+				<form:input path="nome" type="hidden" name="${usuario.nome}" />
+				<form:input path="email" type="hidden" name="${usuario.email}" />
+				<form:input path="senha" type="hidden" name="${usuario.senha}" />
+				<form:input path="senhaRepetida" type="hidden" name="${usuario.senhaRepetida}" />
+				Permissões: 
 				<c:forEach items="${roles}" var="role" varStatus="contador_um">
 					<c:if test="${fn:length(roles) ge contador_um.count}">
+						<form:checkbox path="roles" value="${role.nome }" />
 						<label>${role.nome}</label>
-						<input type="checkbox" name="${role.nome}"
-							<c:if test="${temRole[contador_um.count-1] == true}"> 
-							 	checked="checked" 
-							</c:if>
-						value="${role.nome}"/>
 					</c:if>
 				</c:forEach>
-				
 			</div>
-			
 			
 			<button type="submit" class="btn btn-primary">Atualizar</button>
 		</form:form>

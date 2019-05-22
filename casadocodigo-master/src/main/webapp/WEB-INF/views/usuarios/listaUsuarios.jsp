@@ -37,23 +37,16 @@
 				<th><fmt:message key="lista.usuarios.nome"/></th>
 				<th><fmt:message key="lista.usuarios.email"/></th>
 				<th><fmt:message key="lista.usuarios.role"/></th>
-				<th><img src="${contextPath}resources/imagens/editar.png" alt="Editar"/></th>
+				<th><img src='<c:url value="/resources/imagens/editar.png" />' alt="Editar"/></th>
 			</tr>
 			<c:forEach items="${usuarios}" var="usuario">
 				<tr>
 					<td>${usuario.nome}</td>
 					<td>${usuario.email}</td>
+					<td>${usuario.roles}</td>
 					<td>
-					<c:forEach items="${usuario.roles}" var="role" varStatus="contador">
-							<c:if test="${fn:length(usuario.roles) gt contador.count}">
-								${role.nome},
-							</c:if>
-							${role.nome}
-					</c:forEach>
-					</td>
-					<td>
-						<a href="${s:mvcUrl('UC#adicionaRole').arg(0, usuario.email).build() }">
-							<img alt="adicionar" src="${contextPath}resources/imagens/adicionar.png">
+						<a href="${s:mvcUrl('UC#editaRole').arg(0, usuario.email).build() }">
+							<img src='<c:url value="/resources/imagens/adicionar.png" />' alt="adicionar">
 						</a>
 					</td>
 				</tr>

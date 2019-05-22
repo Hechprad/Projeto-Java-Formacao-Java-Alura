@@ -1,6 +1,5 @@
 package br.com.casadocodigo.loja.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -78,7 +76,7 @@ public class UsuarioController {
     }
 	
 	@RequestMapping("/formRoles")
-	private ModelAndView adicionaRole(String email) {
+	private ModelAndView editaRole(String email) {
 		System.out.println(email);
 
 		ModelAndView modelAndView = new ModelAndView("usuarios/formRoles");
@@ -88,32 +86,12 @@ public class UsuarioController {
 		
 		List<Role> roles = roleDao.listarRoles();
 		modelAndView.addObject("roles", roles);
-				
-		List<Role> rolesUsuario = usuario.getRoles();
-		List<Boolean> temRole = new ArrayList<Boolean>();
-		
-		//Criando a lista com os valores de role do usuário
-		int i = 0;
-		for(Role role : roles) {
-			for (Role roleUsuario : rolesUsuario) {
-				if(roleUsuario.equals(role)) {
-					i = 1;
-				}
-			}
-			if(i == 1) {
-				temRole.add(true);
-				i = 0;
-			} else temRole.add(false);
-		}
-		
-		modelAndView.addObject("temRole", temRole);
 		
 		return modelAndView;
 	}
 	
 	@RequestMapping(value="/formRoles", method=RequestMethod.POST)
-	private ModelAndView atualizaPermissoesDoUsuario() {
-		
+	private ModelAndView atualizaPermissoesDoUsuario(Usuario usuario) {
 		
 		return new ModelAndView("redirect:/usuarios");
 	}
